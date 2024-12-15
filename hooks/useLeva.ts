@@ -5,16 +5,18 @@ import { useControls, folder } from "leva";
 export default function useLeva() {
   const values = useControls({
     lighting: folder({
-      dLColor: "#ffffff",
+      dLColor: "#fff2e1",
       dLIntensity: { value: 1, min: 0, max: 10, step: 0.1 },
       dLPosX: { value: 0, min: -10, max: 10, step: 0.1 },
-      dLPosY: { value: 1, min: -10, max: 10, step: 0.1 },
-      dLPosZ: { value: 0, min: -10, max: 10, step: 0.1 },
+      dLPosY: { value: 1.5, min: -10, max: 10, step: 0.1 },
+      dLPosZ: { value: -3, min: -10, max: 10, step: 0.1 },
     }),
     floor: folder({
       flBlurWidth: { value: 0, min: 0, max: 300, step: 1 },
       flBlurHeight: { value: 0, min: 0, max: 300, step: 1 },
       flMixBlur: { value: 0, min: 0, max: 1, step: 0.1 },
+      flRoughness: { value: 0.3, min: 0, max: 1, step: 0.01 },
+      flMetalness: { value: 0.2, min: 0, max: 1, step: 0.01 },
       flMixStrength: { value: 1.5, min: 0, max: 10, step: 0.1 },
       flMixContrast: { value: 1, min: 0, max: 10, step: 0.1 },
       flResolution: { value: 512, min: 0, max: 1024, step: 1 },
@@ -51,7 +53,7 @@ export default function useLeva() {
       mRotY: { value: 0, min: -Math.PI, max: Math.PI, step: 0.01 },
       mRotZ: { value: 0, min: -Math.PI, max: Math.PI, step: 0.01 },
       mScale: { value: 0.3, min: 0, max: 5, step: 0.01 },
-      mColor: { value: "#102733" },
+      mColor: { value: "#620000" },
     }),
   });
 

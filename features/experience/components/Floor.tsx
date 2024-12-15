@@ -27,6 +27,9 @@ type FloorProps = {
   flDepthToBlurRatioBias: number;
   flDistortion: number;
   flReflectorOffset: number;
+
+  flRoughness: number;
+  flMetalness: number;
 };
 
 export default function Floor({
@@ -55,6 +58,8 @@ export default function Floor({
   flMixStrength,
   flReflectorOffset,
   flResolution,
+  flMetalness,
+  flRoughness,
 }: FloorProps) {
   return (
     <>
@@ -65,6 +70,8 @@ export default function Floor({
       >
         <ringGeometry args={[0, flRadius, flThetaSeg]} />
         <MeshReflectorMaterial
+          roughness={flRoughness}
+          metalness={flMetalness}
           color={flColor}
           blur={[flBlurHeight, flBlurWidth]}
           mixBlur={flMixBlur}
