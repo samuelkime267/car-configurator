@@ -5,9 +5,25 @@ import Models from "./Models";
 import useLeva from "@/hooks/useLeva";
 import Lights from "./Lights";
 import Floor from "./Floor";
+import { currentModelType } from "@/typings";
+import { useEffect, useState } from "react";
 
 export default function Experience() {
-  const { bgColor, ...values } = useLeva();
+  const [currentModel, setCurrentModel] = useState<currentModelType>("bugatti");
+  const { bgColor, ...values } = useLeva(currentModel);
+
+  useEffect(() => {
+    const handleClick = () => {
+      if (currentModel === "audi") setCurrentModel("bugatti");
+      if (currentModel === "bugatti") setCurrentModel("ferrari");
+      if (currentModel === "ferrari") setCurrentModel("audi");
+    };
+    window.addEventListener("click", handleClick);
+
+    return () => {
+      window.removeEventListener("click", handleClick);
+    };
+  }, [currentModel]);
 
   return (
     <>
@@ -21,7 +37,7 @@ export default function Experience() {
       />
 
       <Lights {...values} />
-      <Models {...values} />
+      <Models {...values} currentModel={currentModel} />
       <Floor {...values} />
     </>
   );

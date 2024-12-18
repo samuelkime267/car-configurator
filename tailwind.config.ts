@@ -8,7 +8,11 @@ export default {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        grotesk: ["var(--font-grotesk)", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 } satisfies Config;
