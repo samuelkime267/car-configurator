@@ -18,9 +18,9 @@ button.secondary {
   @apply capitalize px-4 py-2.5 rounded-full hover:bg-white/70 hover:text-pri font-medium duration-300 bg-white text-pri flex items-center justify-center gap-2;
 }
 
-/* .sasdf{
-  color: #520000;
-} */
+.sasdf {
+  color: #e2e200;
+}
 
 /* 
 ["#ffffff", "#520000", "#523100", "#005200", "#005244", "#004d52", "#002952", "#000452", "#310052", "#52003c"]

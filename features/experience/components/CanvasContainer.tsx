@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { Stats } from "@react-three/drei";
+// import { Stats } from "@react-three/drei";
 import Experience from "./Experience";
 import { Leva } from "leva";
 import { currentModelType } from "@/typings";
@@ -14,13 +14,13 @@ type CanvasProps = {
 export default function CanvasContainer({ carColor, curModel }: CanvasProps) {
   return (
     <div className="fixed top-0 left-0 w-full h-full">
-      <Leva collapsed />
+      <Leva collapsed hidden />
       <Canvas
         dpr={1}
         shadows
         camera={{ position: [0, 0, 10], fov: 45, near: 0.001, far: 100 }}
       >
-        <Stats />
+        {/* <Stats  /> */}
         <Experience carColor={carColor} curModel={curModel} />
       </Canvas>
     </div>

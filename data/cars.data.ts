@@ -34,6 +34,10 @@ export const carsColor = [
     name: "red",
   },
   {
+    color: "#e2e200",
+    name: "yellow",
+  },
+  {
     color: "#523100",
     name: "brown",
   },
@@ -46,16 +50,12 @@ export const carsColor = [
     name: "cyan",
   },
   {
-    color: "#002952",
+    color: "#000452",
     name: "blue",
   },
   {
-    color: "#000452",
-    name: "red",
-  },
-  {
     color: "#310052",
-    name: "biro blue",
+    name: "purple",
   },
   {
     color: "#52003c",

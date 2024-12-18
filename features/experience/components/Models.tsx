@@ -13,48 +13,27 @@ type ModelProps = {
   curModel: currentModelType;
   carColor: string;
 };
+type VehicleProps = {
+  carColor: string;
+};
 
-export default function Models({
-  mPosY,
-  mRotY,
-  mScale,
-  curModel,
-  carColor,
-}: ModelProps) {
+export default function Models({ curModel, carColor }: ModelProps) {
   return (
     <>
       <Suspense fallback={null}>
         {curModel === "audi" ? (
-          <AudiModels
-            carColor={carColor}
-            curModel={curModel}
-            mPosY={mPosY}
-            mRotY={mRotY}
-            mScale={mScale}
-          />
+          <AudiModels carColor={carColor} />
         ) : curModel === "ferrari" ? (
-          <FerrariModels
-            carColor={carColor}
-            curModel={curModel}
-            mPosY={mPosY}
-            mRotY={mRotY}
-            mScale={mScale}
-          />
+          <FerrariModels carColor={carColor} />
         ) : (
-          <BugattiModels
-            carColor={carColor}
-            curModel={curModel}
-            mPosY={mPosY}
-            mRotY={mRotY}
-            mScale={mScale}
-          />
+          <BugattiModels carColor={carColor} />
         )}
       </Suspense>
     </>
   );
 }
 
-function AudiModels({ mPosY, mRotY, mScale, carColor }: ModelProps) {
+function AudiModels({ carColor }: VehicleProps) {
   const models = useGLTF("/models/audi.glb");
   useEffect(() => {
     models.scene.traverse((child) => {
@@ -71,11 +50,7 @@ function AudiModels({ mPosY, mRotY, mScale, carColor }: ModelProps) {
   return (
     <>
       <Suspense fallback={null}>
-        <Center
-          position={[0, mPosY, 0]}
-          rotation={[0, mRotY, 0]}
-          scale={[mScale, mScale, mScale]}
-        >
+        <Center position={[0, -0.1, 0]} scale={[0.3, 0.3, 0.3]}>
           <primitive object={models.scene} />
         </Center>
       </Suspense>
@@ -83,21 +58,13 @@ function AudiModels({ mPosY, mRotY, mScale, carColor }: ModelProps) {
   );
 }
 
-function BugattiModels({
-  mPosY,
-  mRotY,
-  mScale,
-
-  carColor,
-}: ModelProps) {
+function BugattiModels({ carColor }: VehicleProps) {
   const models = useGLTF("/models/bugatti_la_voitre_noir.glb");
   useEffect(() => {
     models.scene.traverse((child) => {
       if (child instanceof THREE.Mesh) {
         child.castShadow = true;
         child.receiveShadow = true;
-
-        // for bugatti
         if (
           child.name === "Object_9_1" ||
           child.name === "Object_11_1" ||
@@ -114,9 +81,9 @@ function BugattiModels({
     <>
       <Suspense fallback={null}>
         <Center
-          position={[0, mPosY, 0]}
-          rotation={[0, mRotY, 0]}
-          scale={[mScale, mScale, mScale]}
+          position={[0, -0.26, 0]}
+          rotation={[0, -Math.PI * 0.5, 0]}
+          scale={[0.5, 0.5, 0.5]}
         >
           <primitive object={models.scene} />
         </Center>
@@ -125,13 +92,7 @@ function BugattiModels({
   );
 }
 
-function FerrariModels({
-  mPosY,
-  mRotY,
-  mScale,
-
-  carColor,
-}: ModelProps) {
+function FerrariModels({ carColor }: VehicleProps) {
   const models = useGLTF("/models/2016_ferrari_f12tdf.glb");
   useEffect(() => {
     models.scene.traverse((child) => {
@@ -152,9 +113,9 @@ function FerrariModels({
     <>
       <Suspense fallback={null}>
         <Center
-          position={[0, mPosY, 0]}
-          rotation={[0, mRotY, 0]}
-          scale={[mScale, mScale, mScale]}
+          position={[0, -0.17, 0]}
+          rotation={[0, Math.PI * 0.5, 0]}
+          scale={[130, 130, 130]}
         >
           <primitive object={models.scene} />
         </Center>
