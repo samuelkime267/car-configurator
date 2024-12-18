@@ -4,8 +4,14 @@ import { Canvas } from "@react-three/fiber";
 import { Stats } from "@react-three/drei";
 import Experience from "./Experience";
 import { Leva } from "leva";
+import { currentModelType } from "@/typings";
 
-export default function CanvasContainer() {
+type CanvasProps = {
+  carColor: string;
+  curModel: currentModelType;
+};
+
+export default function CanvasContainer({ carColor, curModel }: CanvasProps) {
   return (
     <div className="fixed top-0 left-0 w-full h-full">
       <Leva collapsed />
@@ -15,7 +21,7 @@ export default function CanvasContainer() {
         camera={{ position: [0, 0, 10], fov: 45, near: 0.001, far: 100 }}
       >
         <Stats />
-        <Experience />
+        <Experience carColor={carColor} curModel={curModel} />
       </Canvas>
     </div>
   );

@@ -6,24 +6,14 @@ import useLeva from "@/hooks/useLeva";
 import Lights from "./Lights";
 import Floor from "./Floor";
 import { currentModelType } from "@/typings";
-import { useEffect, useState } from "react";
 
-export default function Experience() {
-  const [currentModel, setCurrentModel] = useState<currentModelType>("bugatti");
-  const { bgColor, ...values } = useLeva(currentModel);
+type ExperienceProps = {
+  carColor: string;
+  curModel: currentModelType;
+};
 
-  useEffect(() => {
-    const handleClick = () => {
-      if (currentModel === "audi") setCurrentModel("bugatti");
-      if (currentModel === "bugatti") setCurrentModel("ferrari");
-      if (currentModel === "ferrari") setCurrentModel("audi");
-    };
-    window.addEventListener("click", handleClick);
-
-    return () => {
-      window.removeEventListener("click", handleClick);
-    };
-  }, [currentModel]);
+export default function Experience({ carColor, curModel }: ExperienceProps) {
+  const { bgColor, ...values } = useLeva(curModel);
 
   return (
     <>
@@ -37,7 +27,7 @@ export default function Experience() {
       />
 
       <Lights {...values} />
-      <Models {...values} currentModel={currentModel} />
+      <Models {...values} carColor={carColor} curModel={curModel} />
       <Floor {...values} />
     </>
   );

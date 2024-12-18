@@ -10,47 +10,89 @@ type ModelProps = {
   mPosY: number;
   mRotY: number;
   mScale: number;
-  mColor: string;
-  currentModel: currentModelType;
+  curModel: currentModelType;
+  carColor: string;
 };
 
 export default function Models({
   mPosY,
   mRotY,
   mScale,
-  mColor,
-  currentModel,
+  curModel,
+  carColor,
 }: ModelProps) {
-  const models = useGLTF([
-    "/models/audi.glb",
-    "/models/2016_ferrari_f12tdf.glb",
-    "/models/bugatti_la_voitre_noir.glb",
-  ]);
+  return (
+    <>
+      <Suspense fallback={null}>
+        {curModel === "audi" ? (
+          <AudiModels
+            carColor={carColor}
+            curModel={curModel}
+            mPosY={mPosY}
+            mRotY={mRotY}
+            mScale={mScale}
+          />
+        ) : curModel === "ferrari" ? (
+          <FerrariModels
+            carColor={carColor}
+            curModel={curModel}
+            mPosY={mPosY}
+            mRotY={mRotY}
+            mScale={mScale}
+          />
+        ) : (
+          <BugattiModels
+            carColor={carColor}
+            curModel={curModel}
+            mPosY={mPosY}
+            mRotY={mRotY}
+            mScale={mScale}
+          />
+        )}
+      </Suspense>
+    </>
+  );
+}
+
+function AudiModels({ mPosY, mRotY, mScale, carColor }: ModelProps) {
+  const models = useGLTF("/models/audi.glb");
   useEffect(() => {
-    models[0].scene.traverse((child) => {
+    models.scene.traverse((child) => {
       if (child instanceof THREE.Mesh) {
         child.castShadow = true;
         child.receiveShadow = true;
         if (child.name === "Object_16" || child.name === "Object_42") {
-          child.material.color = new THREE.Color(mColor);
+          child.material.color = new THREE.Color(carColor);
         }
       }
     });
+  }, [carColor, models]);
 
-    models[1].scene.traverse((child) => {
-      if (child instanceof THREE.Mesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-        if (
-          child.name ===
-          "Ferrari_F12_carchassis_carpaint_custom01_LOD2_carpaint_0"
-        ) {
-          child.material.color = new THREE.Color(mColor);
-        }
-      }
-    });
+  return (
+    <>
+      <Suspense fallback={null}>
+        <Center
+          position={[0, mPosY, 0]}
+          rotation={[0, mRotY, 0]}
+          scale={[mScale, mScale, mScale]}
+        >
+          <primitive object={models.scene} />
+        </Center>
+      </Suspense>
+    </>
+  );
+}
 
-    models[2].scene.traverse((child) => {
+function BugattiModels({
+  mPosY,
+  mRotY,
+  mScale,
+
+  carColor,
+}: ModelProps) {
+  const models = useGLTF("/models/bugatti_la_voitre_noir.glb");
+  useEffect(() => {
+    models.scene.traverse((child) => {
       if (child instanceof THREE.Mesh) {
         child.castShadow = true;
         child.receiveShadow = true;
@@ -62,30 +104,60 @@ export default function Models({
           child.name === "Object_12_1" ||
           child.name === "Object_1"
         ) {
-          child.material.color = new THREE.Color(mColor);
+          child.material.color = new THREE.Color(carColor);
         }
       }
     });
-  }, [mColor, models]);
+  }, [carColor, models]);
 
   return (
     <>
       <Suspense fallback={null}>
-        <group
+        <Center
           position={[0, mPosY, 0]}
           rotation={[0, mRotY, 0]}
           scale={[mScale, mScale, mScale]}
         >
-          <primitive
-            object={
-              currentModel === "audi"
-                ? models[0].scene
-                : currentModel === "ferrari"
-                ? models[1].scene
-                : models[2].scene
-            }
-          />
-        </group>
+          <primitive object={models.scene} />
+        </Center>
+      </Suspense>
+    </>
+  );
+}
+
+function FerrariModels({
+  mPosY,
+  mRotY,
+  mScale,
+
+  carColor,
+}: ModelProps) {
+  const models = useGLTF("/models/2016_ferrari_f12tdf.glb");
+  useEffect(() => {
+    models.scene.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+        if (
+          child.name ===
+          "Ferrari_F12_carchassis_carpaint_custom01_LOD2_carpaint_0"
+        ) {
+          child.material.color = new THREE.Color(carColor);
+        }
+      }
+    });
+  }, [carColor, models]);
+
+  return (
+    <>
+      <Suspense fallback={null}>
+        <Center
+          position={[0, mPosY, 0]}
+          rotation={[0, mRotY, 0]}
+          scale={[mScale, mScale, mScale]}
+        >
+          <primitive object={models.scene} />
+        </Center>
       </Suspense>
     </>
   );

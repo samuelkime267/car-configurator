@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply font-grotesk;
+}
+
+button {
+  @apply outline-none;
+}
+
+button.primary {
+  @apply capitalize px-4 py-2.5 rounded-full hover:bg-pri/70 hover:text-white/80 font-medium duration-300 bg-pri text-white flex items-center justify-center gap-2;
+}
+
+button.secondary {
+  @apply capitalize px-4 py-2.5 rounded-full hover:bg-white/70 hover:text-pri font-medium duration-300 bg-white text-pri flex items-center justify-center gap-2;
+}
+
+/* .sasdf{
+  color: #520000;
+} */
+
+/* 
+["#ffffff", "#520000", "#523100", "#005200", "#005244", "#004d52", "#002952", "#000452", "#310052", "#52003c"]
+*/

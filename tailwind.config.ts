@@ -12,6 +12,9 @@ export default {
       fontFamily: {
         grotesk: ["var(--font-grotesk)", "sans-serif"],
       },
+      colors: {
+        pri: "#050f1a",
+      },
     },
   },
   plugins: [],

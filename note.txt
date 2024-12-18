@@ -2,5 +2,3 @@ Names of car models used:
 - 2015 audi q7
 - 2016 ferrari f12 tdf
 - bugatti_la_voitre_noir
-- 1965_ford_mustang_convertible
-- bmw e34
