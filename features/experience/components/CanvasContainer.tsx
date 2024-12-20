@@ -18,7 +18,7 @@ export default function CanvasContainer({ carColor, curModel }: CanvasProps) {
       <Canvas
         dpr={1}
         shadows
-        camera={{ position: [0, 0, 10], fov: 45, near: 0.001, far: 100 }}
+        camera={{ position: [10.6, 2, -7.7], fov: 45, near: 0.001, far: 100 }}
       >
         {/* <Stats  /> */}
         <Experience carColor={carColor} curModel={curModel} />

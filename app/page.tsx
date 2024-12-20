@@ -7,7 +7,7 @@ import { useState } from "react";
 import { currentModelType } from "@/typings";
 
 export default function Home() {
-  const [carColor, setCarColor] = useState("#ffffff");
+  const [carColor, setCarColor] = useState("#000000");
   const [curModel, setCurModel] = useState<currentModelType>("audi");
   return (
     <div>

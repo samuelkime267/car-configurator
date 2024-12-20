@@ -6,6 +6,8 @@ import useLeva from "@/hooks/useLeva";
 import Lights from "./Lights";
 import Floor from "./Floor";
 import { currentModelType } from "@/typings";
+import { useThree } from "@react-three/fiber";
+import { useEffect } from "react";
 
 type ExperienceProps = {
   carColor: string;
@@ -14,6 +16,13 @@ type ExperienceProps = {
 
 export default function Experience({ carColor, curModel }: ExperienceProps) {
   const { bgColor, ...values } = useLeva(curModel);
+  const { camera } = useThree();
+
+  useEffect(() => {
+    window.addEventListener("click", () => {
+      console.log(camera.position);
+    });
+  }, [camera]);
 
   return (
     <>
