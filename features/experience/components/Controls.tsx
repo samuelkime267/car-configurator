@@ -10,34 +10,26 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { carsColor } from "@/data/cars.data";
 import { cn } from "@/lib/utils";
-import { currentModelType } from "@/typings";
 
 type ControlsProps = {
   carColor: string;
-  curModel: currentModelType;
-  setCarColor: React.Dispatch<React.SetStateAction<string>>;
-  setCurModel: React.Dispatch<React.SetStateAction<currentModelType>>;
+  handleNextModel: () => void;
+  handlePrevModel: () => void;
+  handleColor: (color: string) => void;
 };
 
 export default function Controls({
   carColor,
-  setCarColor,
-  setCurModel,
+  handleColor,
+  handleNextModel,
+  handlePrevModel,
 }: ControlsProps) {
   return (
-    <div className="fixed bottom-0 left-0 w-full z-[3] p-4 flex items-center justify-between">
+    <div className="fixed bottom-0 left-0 w-full z-[3] p-4 flex items-center justify-between details-show">
       <Button
         btnType="secondary"
         className="md:flex max-md:!px-2.5"
-        onClick={() => {
-          setCurModel((curModel) =>
-            curModel === "ferrari"
-              ? "bugatti"
-              : curModel === "bugatti"
-              ? "audi"
-              : "ferrari"
-          );
-        }}
+        onClick={handlePrevModel}
       >
         <Arrow className="w-6 md:w-8 h-6 md:h-8 -rotate-90" />
         <p className="hidden md:block">previous</p>
@@ -55,7 +47,7 @@ export default function Controls({
               return (
                 <Button
                   key={i}
-                  onClick={() => setCarColor(color)}
+                  onClick={() => handleColor(color)}
                   className={cn(
                     "flex items-center justify-start gap-2 mb-1 p-1 w-full rounded-full duration-300 hover:bg-white",
                     {
@@ -80,15 +72,7 @@ export default function Controls({
       <Button
         btnType="secondary"
         className="md:flex max-md:!px-2.5"
-        onClick={() => {
-          setCurModel((curModel) =>
-            curModel === "audi"
-              ? "bugatti"
-              : curModel === "bugatti"
-              ? "ferrari"
-              : "audi"
-          );
-        }}
+        onClick={handleNextModel}
       >
         <p className="hidden md:block">next</p>
         <Arrow className="w-6 md:w-8 h-6 md:h-8 rotate-90" />

@@ -197,12 +197,17 @@ export default function useLoader(
     const ctx = gsap.context(() => {
       if (!isLoading) {
         gsap.to(counterHolderRef.current, {
-          xPercent: -100,
+          translateX: "-100%",
+          duration: 0.2,
         });
       } else {
-        gsap.to(counterHolderRef.current, {
-          xPercent: 0,
-        });
+        gsap.fromTo(
+          counterHolderRef.current,
+          {
+            translateX: "-100%",
+          },
+          { translateX: "0%", duration: 0.2 }
+        );
       }
     });
 
@@ -212,21 +217,6 @@ export default function useLoader(
   }, [isLoading, counterHolderRef]);
 
   useEffect(() => {
-    if (progress === 100) {
-      loaderTl.current.play();
-    }
-
-    if (progress !== 100 && !isLoading) {
-      setIsLoading(true);
-      loaderTl.current.pause(0);
-    }
-  }, [progress, isLoading]);
-
-  useEffect(() => {
-    window.addEventListener("click", () => {
-      loaderTl.current.play(0);
-    });
-
     if (progress === 100) {
       loaderTl.current.play();
     }

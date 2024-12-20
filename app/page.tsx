@@ -3,22 +3,16 @@
 import CanvasContainer from "@/features/experience/components/CanvasContainer";
 import Controls from "@/features/experience/components/Controls";
 import Info from "@/features/experience/components/Info";
-import { useState } from "react";
-import { currentModelType } from "@/typings";
+import useControls from "@/hooks/useControls";
 
 export default function Home() {
-  const [carColor, setCarColor] = useState("#000000");
-  const [curModel, setCurModel] = useState<currentModelType>("audi");
+  const values = useControls();
+
   return (
     <div>
-      <CanvasContainer carColor={carColor} curModel={curModel} />
-      <Info curModel={curModel} />
-      <Controls
-        curModel={curModel}
-        setCurModel={setCurModel}
-        carColor={carColor}
-        setCarColor={setCarColor}
-      />
+      <CanvasContainer {...values} />
+      <Info {...values} />
+      <Controls {...values} />
     </div>
   );
 }

@@ -11,12 +11,12 @@ export default function Info({ curModel }: InfoProps) {
   const { name, price } = carDetails.find(({ tag }) => tag === curModel) || {};
 
   return (
-    <div className="fixed top-[4.75rem] left-0 w-full z-[2] p-4 md:pt-8">
+    <div className="fixed top-[4.75rem] left-0 w-full z-[2] p-4 md:pt-8 details-show">
       <div className="flex items-start justify-start md:items-center md:justify-between flex-col md:flex-row gap-2 md:gap-4">
-        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold uppercase text-pri md:max-w-[20pc]">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold uppercase text-pri md:max-w-[20pc] info-text">
           {name}
         </h1>
-        <h1 className="text-3xl md:text-4xl lg:text-[2.7rem] font-bold uppercase text-pri max-w-[25pc]">
+        <h1 className="text-3xl md:text-4xl lg:text-[2.7rem] font-bold uppercase text-pri max-w-[25pc] info-text">
           {price && formatToDollarPrice(price)}
         </h1>
       </div>
